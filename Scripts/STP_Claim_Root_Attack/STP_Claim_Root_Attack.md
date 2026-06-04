@@ -121,7 +121,7 @@ sudo / root (obligatorio)
 │              ┌────┴──────┐                               │
 │              │Kali Linux │ ← ATACANTE                    │
 │              │  eth2     │   Priority 0 > Priority 4096  │
-│              │192.168.   │   → Kali gana la elección     │
+│              │7.41.      │   → Kali gana la elección     │
 │              │ 10.50/24  │   → Red reconverge            │
 │              └───────────┘   → DoS 30-50 segundos        │
 │                                                          │
