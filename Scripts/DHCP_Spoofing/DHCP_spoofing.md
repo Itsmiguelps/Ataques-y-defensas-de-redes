@@ -295,5 +295,3 @@ El video debe incluir:
 ---
  
 *Laboratorio de Seguridad en Redes · Entorno: PNetLab + Kali Linux Docker + Cisco IOSvL2*
-
-*← [Ataque anterior: 02 — ARP MitM](#) | [Volver al repositorio principal](#) | Siguiente: [04 — DHCP Starvation →](#)*
