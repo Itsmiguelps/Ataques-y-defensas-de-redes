@@ -237,24 +237,4 @@ El video debe incluir:
 
 ---
 
-## 📁 Estructura del Repositorio
-
-```
-02-arp-mitm/
-├── README.md
-├── scripts/
-│   └── 02_arp_mitm.py
-├── screenshots/
-│   ├── 01_topologia.png
-│   ├── 02_arp_antes.png
-│   ├── 03_ataque_ejecucion.png
-│   ├── 04_arp_envenenado.png
-│   ├── 05_tcpdump.png
-│   └── 06_contramedia.png
-└── video/
-    └── demo_02_arp_mitm.mp4
-```
-
----
-
 *← [Ataque anterior: 01 — CDP DoS](#) | [Volver al repositorio principal](#) | Siguiente: [03 — DHCP Spoofing →](#)*
