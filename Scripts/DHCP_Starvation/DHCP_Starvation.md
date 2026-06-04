@@ -93,7 +93,7 @@ sudo / root (obligatorio)
 ┌──────────────────────────────────────────────────────────┐
 │  Topología: DHCP Starvation                              │
 │                                                          │
-│  192.168.10.1               192.168.10.50                │
+│   7.41.10.1                    7.41.10.50                │
 │  ┌──────────┐               ┌──────────────┐             │
 │  │ Router   │               │  Kali Linux  │             │
 │  │   R1     │               │  (Atacante)  │             │
@@ -111,7 +111,7 @@ sudo / root (obligatorio)
 │  │  (falla)  │   Pool agotado — sin IP disponible        │
 │  └───────────┘                                           │
 │                                                          │
-│  RESULTADO: Pool 192.168.10.101–.254 (154 IPs) agotado   │
+│  RESULTADO: Pool 7.41.10.101–.254 (154 IPs) agotado      │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -119,29 +119,29 @@ sudo / root (obligatorio)
 
 | Interfaz / Nodo | Rol y Dirección IP |
 |-----------------|-------------------|
-| R1 — e0/0 | 192.168.10.1/24 — Gateway + DHCP Server |
-| DHCP Pool | 192.168.10.101 – 192.168.10.254 (154 IPs disponibles) |
-| Kali — eth2 | 192.168.10.50/24 — Atacante |
+| R1 — e0/0 | 7.41.10.1/24 — Gateway + DHCP Server |
+| DHCP Pool | 7.41.10.101 – 7.41.10.254 (154 IPs disponibles) |
+| Kali — eth2 | 7.41.10.50/24 — Atacante |
 | PC-Víctima — eth1 | DHCP dinámico — falla al solicitar IP |
-| Red | 192.168.10.0/24 |
+| Red | 7.41.10.0/24 |
 
 ---
 
 ## ⚙️ Configuración del Router R1
 
-Idéntica a la del Ataque 03 (DHCP Spoofing). El pool es `192.168.10.101–254` (154 IPs disponibles para agotar).
+Idéntica a la del Ataque 03 (DHCP Spoofing). El pool es `7.41.10.101–254` (154 IPs disponibles para agotar).
 
 ```cisco
 R1> enable
 R1# configure terminal
 R1(config)# interface e0/0
-R1(config-if)# ip address 192.168.10.1 255.255.255.0
+R1(config-if)# ip address 7.41.10.1 255.255.255.0
 R1(config-if)# no shutdown
 R1(config-if)# exit
-R1(config)# ip dhcp excluded-address 192.168.10.1 192.168.10.100
+R1(config)# ip dhcp excluded-address 7.41.10.1 7.41.10.100
 R1(config)# ip dhcp pool POOL-LEGITIMO
-R1(dhcp-config)# network 192.168.10.0 255.255.255.0
-R1(dhcp-config)# default-router 192.168.10.1
+R1(dhcp-config)# network 7.41.10.0 255.255.255.0
+R1(dhcp-config)# default-router 7.41.10.1
 R1(dhcp-config)# dns-server 8.8.8.8
 R1(dhcp-config)# lease 0 2
 R1(dhcp-config)# exit
@@ -183,7 +183,7 @@ DHCP Discover con:
 
 ```bash
 # Configurar interfaz
-ip addr add 192.168.10.50/24 dev eth2
+ip addr add 7.41.10.50/24 dev eth2
 ip link set eth2 up
 
 # Instalar dependencias
@@ -279,7 +279,7 @@ SW# show interface e0/0 status
 | **Capa OSI** | Capa 2/3 — Enlace / Red |
 | **Impacto** | DoS: clientes sin IP, sin conectividad de red |
 | **Contra-medida** | `port-security maximum 2` + `violation shutdown` |
-| **IPs en pool objetivo** | 154 (192.168.10.101 – 192.168.10.254) |
+| **IPs en pool objetivo** | 154 (7.41.10.101 – 7.41.10.254) |
  
 ---
 ---
