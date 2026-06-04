@@ -1,7 +1,7 @@
 # 🟣 Ataque 06 — STP Root Claim: Usurpación del Root Bridge en Spanning Tree
 
 > **Entorno:** PNetLab + Kali Linux Docker + Cisco IOSvL2 (3 switches)  
-> **Script:** `06_stp_root_claim.py` | **Herramienta:** Python 3 + Scapy
+> **Script:** `stp_root_claim.py` | **Herramienta:** Python 3 + Scapy
 
 ---
 
@@ -56,7 +56,7 @@ Durante el ataque:
   [30-50 segundos de reconvergencia STP = red caída]
 ```
  
-El script `06_stp_root_claim.py` construye **BPDUs de configuración STP/PVST+** con:
+El script `stp_root_claim.py` construye **BPDUs de configuración STP/PVST+** con:
 - Bridge Priority: **0** (menor posible = máxima prioridad)
 - Root Path Cost: **0** (afirma estar directamente conectado)
 - Enviados a la dirección multicast `01:80:C2:00:00:00` cada 2 segundos
@@ -240,7 +240,7 @@ Para PVST+ Cisco:           BPDU con encapsulación SNAP específica
 
 ```bash
 # Configurar interfaz de Kali
-ip addr add 192.168.10.50/24 dev eth2
+ip addr add 7.41.10.50/24 dev eth2
 ip link set eth2 up
 
 # STP estándar (802.1D) — modo básico
