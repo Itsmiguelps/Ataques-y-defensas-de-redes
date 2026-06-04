@@ -19,7 +19,7 @@
 |-------|---------|
 | **Asignatura** | Seguridad en Redes |
 | **Entorno** | PNetLab + Kali Linux Docker + Cisco IOSvL2 |
-| **Script** | `05_mac_flooding.py` |
+| **Script** | `mac_flooding.py` |
 | **Protocolo atacado** | Ethernet 802.3 — Tabla CAM del Switch |
 | **Herramienta** | Python 3 + Scapy |
 | **Impacto** | Switch en modo hub → sniffing de toda la red |
@@ -101,10 +101,10 @@ sudo / root (obligatorio)
 │  ┌──────────────────────────────────────┐                │
 │  │         Switch Cisco IOSvL2          │                │
 │  │                                      │                │
-│  │  CAM Table: 8192 entradas máx.      │                 │
-│  │  [████████████████████] 100% LLENA  │                 │
+│  │  CAM Table: 8192 entradas máx.       │                │
+│  │  [████████████████████] 100% LLENA   │                │
 │  │                                      │                │
-│  │  e0/0          e0/1          e0/2   │                 │
+│  │  e0/0          e0/1          e0/2    │                │
 │  └────┬────────────┬─────────────┬─────┘                 │
 │       │            │              │                      │
 │  ┌────┴───┐   ┌────┴───┐   ┌─────┴──┐                    │
@@ -125,8 +125,8 @@ sudo / root (obligatorio)
 
 | Interfaz / Nodo | Rol |
 |-----------------|-----|
-| Kali — eth2 | 192.168.10.50/24 — Atacante |
-| PC-Víctima | 192.168.10.100/24 |
+| Kali — eth2 | 7.41.10.50/24 — Atacante |
+| PC-Víctima | 7.41.10.100/24 |
 | Switch — e0/0 | Puerto de acceso hacia Kali |
 | Objetivo | Tabla CAM del switch (8192 entradas) |
 
@@ -134,7 +134,7 @@ sudo / root (obligatorio)
 
 ## 🔍 Funcionamiento del Script
 
-El script `05_mac_flooding.py` explota la capacidad finita de la tabla CAM:
+El script `mac_flooding.py` explota la capacidad finita de la tabla CAM:
 
 **Generación de tramas:**
 ```
@@ -170,7 +170,7 @@ Ciclo de vida de la tabla CAM:
 
 ```bash
 # Configurar interfaz
-ip addr add 192.168.10.50/24 dev eth2
+ip addr add 7.41.10.50/24 dev eth2
 ip link set eth2 up
 
 # Ataque básico — 100,000 tramas
@@ -180,7 +180,7 @@ sudo python3 05_mac_flooding.py -i eth2 -c 100000
 sudo python3 05_mac_flooding.py -i eth2 --continuous --threads 4
 
 # Con tag VLAN 10 (para topologías con trunk)
-sudo python3 05_mac_flooding.py -i eth2 -c 50000 --vlan 10
+sudo python3 mac_flooding.py -i eth2 -c 50000 --vlan 10
 ```
 
 ### Verificación del Ataque (en el Switch)
