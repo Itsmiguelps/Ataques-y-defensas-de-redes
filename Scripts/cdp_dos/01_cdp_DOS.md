@@ -152,7 +152,7 @@ conf t
 
 ```bash
 # Configurar interfaz de ataque
-ip addr add 192.168.1.50/24 dev eth2
+ip addr add 7.41.1.50/24 dev eth2
 ip link set eth2 up
 
 # Instalar dependencias
