@@ -78,7 +78,7 @@ Cada ataque está organizado en su propio repositorio independiente, con documen
                          │            PNetLab — Lab Capa 2          │
                          └─────────────────────────────────────────┘
 
-  192.168.10.1                                            Kali Linux Docker
+  7.41.10.1                                            Kali Linux Docker
   ┌──────────┐          trunk VLAN10,20       ┌──────────────────────────┐
   │ Router   │───────────────────────────────│         SW1              │
   │   R1     │  e0/0                          │     (Core / VTP Server)  │
@@ -109,12 +109,12 @@ Cada ataque está organizado en su propio repositorio independiente, con documen
 
 | Nodo | Interfaz | Dirección IP | Rol |
 |------|:--------:|:------------:|-----|
-| Router R1 | e0/0 | `192.168.10.1/24` | Gateway + Servidor DHCP |
+| Router R1 | e0/0 | `7.41.10.1/24` | Gateway + Servidor DHCP |
 | Kali Linux | eth1 | DHCP dinámico | Internet (descarga de paquetes) |
-| Kali Linux | eth2 | `192.168.10.50/24` o `192.168.1.50/24` | Interfaz de ataque |
-| PC-Víctima 1 | eth1 | `192.168.1.10/24` | Objetivo (ARP MitM) |
-| PC-Víctima 2 | eth1 | `192.168.1.20/24` | Objetivo (ARP MitM) |
-| PC-Víctima | eth1 | `192.168.10.100/24` | Objetivo (DHCP / MAC / STP) |
+| Kali Linux | eth2 | `7.41.10.50/24` o `7.41.1.50/24` | Interfaz de ataque |
+| PC-Víctima 1 | eth1 | `7.41.1.10/24` | Objetivo (ARP MitM) |
+| PC-Víctima 2 | eth1 | `7.41.1.20/24` | Objetivo (ARP MitM) |
+| PC-Víctima | eth1 | `7.41.10.100/24` | Objetivo (DHCP / MAC / STP) |
 | SW1 | — | — | VTP Server · STP Root · Priority 4096 |
 | SW2, SW3 | — | — | VTP Client · Priority 4096 |
 
@@ -157,7 +157,7 @@ sudo python3 01_cdp_dos.py -i eth2 -c 1000 -d 0.001
 Envía ARP Replies no solicitados (Gratuitous ARP) a dos víctimas cada segundo: le dice a cada una que la IP de la otra tiene la MAC de Kali. Con IP forwarding activo, Kali reenvía el tráfico de forma transparente. Al detener el ataque (Ctrl+C), restaura las tablas ARP originales.
 
 ```bash
-sudo python3 02_arp_mitm.py -t1 192.168.1.10 -t2 192.168.1.20 -i eth2
+sudo python3 02_arp_mitm.py -t1 7.41.1.10 -t2 7.41.1.20 -i eth2
 ```
 
 | Parámetro | Descripción |
@@ -178,8 +178,8 @@ Implementa un servidor DHCP fraudulento que responde al handshake DORA completo 
 
 ```bash
 sudo python3 03_dhcp_spoofing.py -i eth2 \
-  --pool 192.168.10.200-220 \
-  --gateway 192.168.10.50 \
+  --pool 7.41.10.200-220 \
+  --gateway 7.41.10.50 \
   --dns 8.8.8.8
 ```
 
@@ -270,23 +270,7 @@ sudo python3 06_stp_root_claim.py -i eth2 --priority 0 --hello 1 --vlan 10
 | 🟣 STP Root Claim | STP/PVST+ | DoS 30–50 s · control topología | `bpduguard` + `guard root` |
 
 ---
---- 
-## 📡 Tabla de Direccionamiento General
- 
-| Nodo | Interfaz | Dirección IP | Rol |
-|---|---|---|---|
-| **Kali Linux** | `eth1` | DHCP (internet) | Acceso a internet para instalar paquetes |
-| **Kali Linux** | `eth2` | `192.168.10.50/24` o `192.168.1.50/24` | Interfaz de ataque |
-| **PC-Víctima 1** | `eth1` | `192.168.1.10/24` | Víctima en ataques MitM |
-| **PC-Víctima 2** | `eth1` | `192.168.1.20/24` | Segunda víctima en ARP MitM |
-| **Router R1** | `e0/0` | `192.168.10.1/24` | Gateway + servidor DHCP |
-| **DHCP Pool** | — | `.101 – .254` | 154 IPs disponibles (lease 2h) |
-| **SW1** | — | VTP Server | Root Bridge · Priority 4096 |
-| **SW2, SW3** | — | VTP Client | Priority 4096 |
-| **VLAN 10** | — | `192.168.10.0/24` | ADMIN |
-| **VLAN 20** | — | `192.168.20.0/24` | USERS |
- 
----
+
 
 ## 🛠️ Configuración General de Kali Linux Docker
 
@@ -298,8 +282,8 @@ service ssh start
 
 # ── Configuración de interfaz de ataque (eth2) ──
 ip addr flush dev eth2
-ip addr add 192.168.10.50/24 dev eth2      # Red DHCP/MAC/STP
-# ip addr add 192.168.1.50/24 dev eth2     # Red ARP MitM
+ip addr add 7.41.10.50/24 dev eth2      # Red DHCP/MAC/STP
+# ip addr add 7.41.1.50/24 dev eth2     # Red ARP MitM
 ip link set eth2 up
 
 # ── Configuración de internet (eth1) ──
@@ -311,7 +295,7 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 sudo sysctl -w net.ipv4.ip_forward=1
 
 # ── Gateway (necesario para DHCP Spoofing) ──
-ip route add default via 192.168.10.1
+ip route add default via 7.41.10.1
 ```
 
 ---
