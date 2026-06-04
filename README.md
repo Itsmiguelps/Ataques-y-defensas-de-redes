@@ -1,14 +1,13 @@
+<div align="center">
 
-# Ataques-y-defensas-de-redes
-Repositorio académico que contiene prácticas de seguridad en redes, incluyendo ARP Spoofing, DHCP Spoofing, DHCP Starvation, MAC Flooding, STP Root Attack y sus respectivas contramedidas en entornos controlados.
-<div align="center">
-<div align="center">
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║          LABORATORIO DE SEGURIDAD EN REDES — CAPA 2             ║
+║          LABORATORIO DE SEGURIDAD EN REDES — CAPA 2              ║
 ║          Ataques y Contramedidas · PNetLab + Kali Linux          ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
+# Ataques-y-defensas-de-redes
+Repositorio académico que contiene prácticas de seguridad en redes, incluyendo ARP Spoofing, DHCP Spoofing, DHCP Starvation, MAC Flooding, STP Root Attack y sus respectivas contramedidas en entornos controlados.
 
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Scapy](https://img.shields.io/badge/Scapy-Latest-009688?style=for-the-badge&logo=python&logoColor=white)
