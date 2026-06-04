@@ -1,8 +1,8 @@
-[README.md](https://github.com/user-attachments/files/28578774/README.md)
+
 # Ataques-y-defensas-de-redes
 Repositorio académico que contiene prácticas de seguridad en redes, incluyendo ARP Spoofing, DHCP Spoofing, DHCP Starvation, MAC Flooding, STP Root Attack y sus respectivas contramedidas en entornos controlados.
 <div align="center">
-
+<div align="center">
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║          LABORATORIO DE SEGURIDAD EN REDES — CAPA 2             ║
