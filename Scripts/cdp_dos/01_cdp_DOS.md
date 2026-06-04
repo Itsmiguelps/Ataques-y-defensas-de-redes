@@ -10,7 +10,7 @@
 |-------|---------|
 | **Asignatura** | Seguridad en Redes |
 | **Entorno** | PNetLab + Kali Linux Docker + Cisco IOSvL2 |
-| **Script** | `01_cdp_dos.py` |
+| **Script** | `cdp_dos.py` |
 | **Protocolo atacado** | CDP — Cisco Discovery Protocol (Capa 2) |
 | **Herramienta** | Python 3 + Scapy |
 | **Impacto** | Agota la tabla de vecinos CDP + alto uso de CPU |
@@ -77,11 +77,11 @@ sudo / root (requerido para envío de paquetes raw)
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    PNetLab Topologia                     │
+│                    PNetLab Topologia                    │
 │                                                         │
 │   ┌──────────┐  Trunk VLAN10,20   ┌──────────┐          │
 │   │   SW1    ├────────────────────┤   SW2    │          │
-│   │ (Core)   │ e0/0 ←──→ e1/0     │ (Client) │           │
+│   │ (Core)   │ e0/0 ←──→ e1/0     │ (Client) │          │
 │   └──────────┘                    └────┬─────┘          │
 │                                        │ e1/1           │
 │                                        │                │
