@@ -29,7 +29,7 @@ Inundar la tabla de vecinos CDP de un switch Cisco con cientos de entradas falsa
 
 ### ¿Cómo funciona?
 
-El script `01_cdp_dos.py` construye paquetes CDP válidos estructuralmente usando las capas:
+El script `cdp_dos.py` construye paquetes CDP válidos estructuralmente usando las capas:
 
 ```
 Ethernet → LLC (DSAP/SSAP=0xAA) → SNAP (OUI=0x00000C, code=0x2000) → CDP Header → TLVs
@@ -101,9 +101,9 @@ sudo / root (requerido para envío de paquetes raw)
 | **SW1 — e0/0** | Trunk VLAN 10, 20 hacia SW2 |
 | **SW2 — e1/0** | Trunk VLAN 10, 20 (hacia SW1) |
 | **SW2 — e1/1** | Trunk VLAN 10, 20 (hacia Kali / víctimas) |
-| **Kali — eth2** | `192.168.1.50/24` — Atacante |
-| **PC-Víctima 1 — eth1** | `192.168.1.10/24` |
-| **PC-Víctima 2 — eth1** | `192.168.1.20/24` |
+| **Kali — eth2** | `7.41.1.50/24` — Atacante |
+| **PC-Víctima 1 — eth1** | `7.41.1.10/24` |
+| **PC-Víctima 2 — eth1** | `7.41.1.20/24` |
 | **VLANs** | VLAN 10 = ADMIN · VLAN 20 = USERS |
 
 ---
