@@ -284,7 +284,7 @@ sudo python3 06_stp_root_claim.py -i eth2 --priority 0 --hello 1 --vlan 10
 | **SW1** | — | VTP Server | Root Bridge · Priority 4096 |
 | **SW2, SW3** | — | VTP Client | Priority 4096 |
 | **VLAN 10** | — | `192.168.10.0/24` | ADMIN |
-| **VLAN 20** | — | — | USERS |
+| **VLAN 20** | — | `192.168.20.0/24` | USERS |
  
 ---
 
