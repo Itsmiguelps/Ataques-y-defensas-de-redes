@@ -1,6 +1,5 @@
 # 🟠 Ataque 02 — ARP MitM: Man-in-the-Middle mediante Envenenamiento ARP
-
-> **Asignatura:** Seguridad en Redes  
+  
 > **Entorno:** PNetLab + Kali Linux Docker + Cisco IOSvL2  
 > **Script:** `arp_mitm.py` | **Herramienta:** Python 3 + Scapy
 
