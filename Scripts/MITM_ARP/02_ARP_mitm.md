@@ -87,7 +87,7 @@ sudo / root (obligatorio)
 | SW1 — e0/0 | Trunk VLAN 10, 20 hacia SW2 |
 | SW2 — e1/0 | Trunk VLAN 10, 20 (hacia SW1) |
 | SW2 — e1/1 | Trunk VLAN 10, 20 (hacia Kali/víctimas) |
-| Kali — eth2 | 192.168.1.50/24 (atacante — intermediario) |
+| Kali — eth2 | 7.41.1.50/24 (atacante — intermediario) |
 | PC-Víctima 1 — eth1 | 7.41.1.10/24 |
 | PC-Víctima 2 — eth1 | 7.41.1.20/24 |
 | VLANs | VLAN 10 ADMIN · VLAN 20 USERS |
