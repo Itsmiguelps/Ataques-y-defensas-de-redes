@@ -128,7 +128,7 @@ sudo / root (obligatorio)
 | Kali — eth2 | 192.168.10.50/24 — Atacante |
 | PC-Víctima | 192.168.10.100/24 |
 | Switch — e0/0 | Puerto de acceso hacia Kali |
-| Objetivo | Tabla CAM del switch (~8192 entradas) |
+| Objetivo | Tabla CAM del switch (8192 entradas) |
 
 ---
 
