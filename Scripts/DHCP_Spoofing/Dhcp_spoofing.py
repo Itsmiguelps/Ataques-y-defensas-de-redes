@@ -27,8 +27,8 @@ REQUISITOS:
     - Estar en el mismo segmento de red (capa 2)
 
 USO:
-    sudo python3 03_dhcp_spoofing.py -i eth2 --pool 192.168.10.200-220 \
-        --gateway 192.168.10.50 --dns 8.8.8.8 --netmask 255.255.255.0
+    sudo python3 03_dhcp_spoofing.py -i eth2 --pool 7.41.10.200-220 \
+        --gateway 7.41.10.50 --dns 8.8.8.8 --netmask 255.255.255.0
 
 PARÁMETROS:
     -i / --interface   : Interfaz de red
@@ -254,7 +254,7 @@ class RogueDHCPServer:
 def parse_pool(pool_str: str) -> list:
     """
     Parsea el rango de IPs del parámetro --pool.
-    Formato: 192.168.1.200-220 o 192.168.1.200-192.168.1.220
+    Formato: 7.41.1.200-220 o 7.41.1.200-7.41.1.220
     """
     try:
         if '-' in pool_str:
@@ -266,7 +266,7 @@ def parse_pool(pool_str: str) -> list:
             return [f"{prefix}.{i}" for i in range(start_octet, end_octet + 1)]
     except:
         pass
-    print(f"{RED}[!] Formato de pool inválido. Use: X.X.X.X-Y (ej: 192.168.1.200-220){RESET}")
+    print(f"{RED}[!] Formato de pool inválido. Use: X.X.X.X-Y (ej: 7.41.1.200-220){RESET}")
     sys.exit(1)
 
 def main():
@@ -276,7 +276,7 @@ def main():
     )
     parser.add_argument("-i", "--interface", required=True)
     parser.add_argument("--pool", required=True,
-                        help="Rango de IPs: ej 192.168.1.200-220")
+                        help="Rango de IPs: ej 7.41.1.200-220")
     parser.add_argument("--gateway", required=True,
                         help="IP del gateway a anunciar (IP atacante para MitM)")
     parser.add_argument("--dns", default="8.8.8.8",
