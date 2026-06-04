@@ -89,8 +89,8 @@ sudo / root (obligatorio)
 | SW2 — e1/0 | Trunk VLAN 10, 20 (hacia SW1) |
 | SW2 — e1/1 | Trunk VLAN 10, 20 (hacia Kali/víctimas) |
 | Kali — eth2 | 192.168.1.50/24 (atacante — intermediario) |
-| PC-Víctima 1 — eth1 | 192.168.1.10/24 |
-| PC-Víctima 2 — eth1 | 192.168.1.20/24 |
+| PC-Víctima 1 — eth1 | 7.41.1.10/24 |
+| PC-Víctima 2 — eth1 | 7.41.1.20/24 |
 | VLANs | VLAN 10 ADMIN · VLAN 20 USERS |
 
 ---
@@ -150,7 +150,7 @@ ip link set eth2 up
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # Ejecutar ataque MitM entre Víctima 1 y Víctima 2
-sudo python3 02_arp_mitm.py -t1 7.41.1.10 -t2 192.168.1.20 -i eth2
+sudo python3 02_arp_mitm.py -t1 7.41.1.10 -t2 7.41.1.20 -i eth2
 
 # En una segunda terminal — verificar que el ARP está envenenado
 arp -n
