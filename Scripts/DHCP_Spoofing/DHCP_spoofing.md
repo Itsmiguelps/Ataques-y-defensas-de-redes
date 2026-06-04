@@ -231,16 +231,6 @@ show ip dhcp pool
 
 ---
 
-## 🖼️ Capturas de Pantalla
-
-| Captura | Descripción |
-|---------|-------------|
-| `screenshots/01_topologia.png` | Vista de la topología en PNetLab |
-| `screenshots/02_r1_dhcp_config.png` | Configuración DHCP en Router R1 |
-| `screenshots/03_ataque_inicio.png` | Servidor Rogue DHCP activo en Kali |
-| `screenshots/04_victima_ip_atacante.png` | Víctima con IP y gateway del atacante |
-| `screenshots/05_r1_sin_binding.png` | R1 sin asignaciones (pool no usado) |
-| `screenshots/06_contramedia_dhcp_snooping.png` | DHCP Snooping configurado |
 
 ---
 
@@ -276,6 +266,20 @@ SW# show ip dhcp snooping binding
 
 **Por qué funciona:** DHCP Snooping clasifica los puertos en *trusted* y *untrusted*. Solo los puertos trusted pueden enviar DHCP Offers/ACK. Cualquier Offer desde un puerto untrusted (como el de Kali) es descartado silenciosamente.
 
+---
+ 
+---
+ 
+## 📊 Tabla Resumen
+ 
+| Campo | Valor |
+|-------|-------|
+| **Protocolo** | DHCP (RFC 2131) |
+| **Capa OSI** | Capa 2/3 — Enlace / Red |
+| **Impacto** | MitM automático + DNS malicioso sobre nuevos clientes |
+| **Contra-medida** | `ip dhcp snooping` + `trust` en uplink |
+| **Puertos** | UDP 67 (servidor) / UDP 68 (cliente) |
+ 
 ---
 
 ## 📹 Video de Demostración
