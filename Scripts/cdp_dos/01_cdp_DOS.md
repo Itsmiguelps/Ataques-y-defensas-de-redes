@@ -221,8 +221,6 @@ SW1(config-if)# no cdp enable
 
 ---
 
-```
-
----
-
 *Laboratorio de Seguridad en Redes · Entorno: PNetLab + Kali Linux Docker + Cisco IOSvL2*
+
+
