@@ -1,4 +1,3 @@
-[README_02_ARP_MitM.md](https://github.com/user-attachments/files/28576946/README_02_ARP_MitM.md)
 # 🟠 Ataque 02 — ARP MitM: Man-in-the-Middle mediante Envenenamiento ARP
 
 > **Asignatura:** Seguridad en Redes  
