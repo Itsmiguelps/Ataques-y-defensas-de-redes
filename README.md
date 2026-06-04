@@ -80,10 +80,10 @@ Cada ataque está organizado en su propio repositorio independiente, con documen
 
   7.41.10.1                                            Kali Linux Docker
   ┌──────────┐          trunk VLAN10,20       ┌──────────────────────────┐
-  │ Router   │───────────────────────────────│         SW1              │
-  │   R1     │  e0/0                          │     (Core / VTP Server)  │
-  │ DHCP GW  │                               │      STP Root Bridge     │
-  └──────────┘                               │      Priority: 4096      │
+  │ Router   │───────────────────────────────│         SW1               │
+  │   R1     │  e0/0                         │     (Core / VTP Server)   │
+  │ DHCP GW  │                               │      STP Root Bridge      │
+  └──────────┘                               │      Priority: 4096       │
                                               └─────────┬──────┬────────┘
                                               e1/0 trunk│      │e0/3 trunk
                                               VLAN 10   │      │ VLAN 10
@@ -99,9 +99,9 @@ Cada ataque está organizado en su propio repositorio independiente, con documen
                                │                            │
                           ┌────┴───────┐             ┌──────┴──────┐
                           │Kali Linux  │             │ PC-Víctimas │
-                          │  Docker   │             │  eth1       │
-                          │  eth2=atk │             │.10 / .20    │
-                          │ 10.50/24  │             │ / .100/24   │
+                          │  Docker    │             │  eth1       │
+                          │  eth2=atk  │             │.10 / .20    │
+                          │ 10.50/24   │             │ / .100/24   │
                           └────────────┘             └─────────────┘
 ```
 
