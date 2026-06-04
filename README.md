@@ -270,6 +270,23 @@ sudo python3 06_stp_root_claim.py -i eth2 --priority 0 --hello 1 --vlan 10
 | 🟣 STP Root Claim | STP/PVST+ | DoS 30–50 s · control topología | `bpduguard` + `guard root` |
 
 ---
+--- 
+## 📡 Tabla de Direccionamiento General
+ 
+| Nodo | Interfaz | Dirección IP | Rol |
+|---|---|---|---|
+| **Kali Linux** | `eth1` | DHCP (internet) | Acceso a internet para instalar paquetes |
+| **Kali Linux** | `eth2` | `192.168.10.50/24` o `192.168.1.50/24` | Interfaz de ataque |
+| **PC-Víctima 1** | `eth1` | `192.168.1.10/24` | Víctima en ataques MitM |
+| **PC-Víctima 2** | `eth1` | `192.168.1.20/24` | Segunda víctima en ARP MitM |
+| **Router R1** | `e0/0` | `192.168.10.1/24` | Gateway + servidor DHCP |
+| **DHCP Pool** | — | `.101 – .254` | 154 IPs disponibles (lease 2h) |
+| **SW1** | — | VTP Server | Root Bridge · Priority 4096 |
+| **SW2, SW3** | — | VTP Client | Priority 4096 |
+| **VLAN 10** | — | `192.168.10.0/24` | ADMIN |
+| **VLAN 20** | — | — | USERS |
+ 
+---
 
 ## 🛠️ Configuración General de Kali Linux Docker
 
