@@ -172,17 +172,6 @@ tcpdump -i eth2 -n host 192.168.1.10
 
 ---
 
-## 🖼️ Capturas de Pantalla
-
-| Captura | Descripción |
-|---------|-------------|
-| `screenshots/01_topologia.png` | Vista de la topología en PNetLab |
-| `screenshots/02_arp_antes.png` | Tabla ARP limpia en víctimas (antes del ataque) |
-| `screenshots/03_ataque_ejecucion.png` | Ejecución del script en Kali |
-| `screenshots/04_arp_envenenado.png` | Tabla ARP con MAC de Kali |
-| `screenshots/05_tcpdump.png` | Tráfico interceptado capturado con tcpdump |
-| `screenshots/06_contramedia.png` | Configuración DAI en el switch |
-
 ---
 
 ## 🛡️ Contra-medida
@@ -220,6 +209,20 @@ SW# show ip arp inspection statistics vlan 1
 
 **Por qué funciona:** DAI valida cada paquete ARP contra la tabla de DHCP Snooping Binding. Si la MAC+IP del paquete ARP no coincide con un binding legítimo, el paquete es descartado silenciosamente.
 
+---
+
+---
+ 
+## 📊 Tabla Resumen
+ 
+| Campo | Valor |
+|-------|-------|
+| **Protocolo** | ARP (RFC 826) |
+| **Capa OSI** | Capa 2 — Enlace de Datos |
+| **Impacto** | Intercepta y puede modificar todo el tráfico |
+| **Contra-medida** | `ip arp inspection vlan` + `port-security maximum 1` |
+| **Tipo de ataque** | Man-in-the-Middle (MitM) |
+ 
 ---
 
 ## 📹 Video de Demostración
