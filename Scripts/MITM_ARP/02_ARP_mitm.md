@@ -235,5 +235,5 @@ El video debe incluir:
 - ✅ Demostración de la contra-medida (DAI)
 
 ---
-
-*← [Ataque anterior: 01 — CDP DoS](#) | [Volver al repositorio principal](#) | Siguiente: [03 — DHCP Spoofing →](#)*
+ 
+*Laboratorio de Seguridad en Redes · Entorno: PNetLab + Kali Linux Docker + Cisco IOSvL2*
