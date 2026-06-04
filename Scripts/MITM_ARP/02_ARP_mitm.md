@@ -2,7 +2,7 @@
 
 > **Asignatura:** Seguridad en Redes  
 > **Entorno:** PNetLab + Kali Linux Docker + Cisco IOSvL2  
-> **Script:** `02_arp_mitm.py` | **Herramienta:** Python 3 + Scapy
+> **Script:** `arp_mitm.py` | **Herramienta:** Python 3 + Scapy
 
 ---
 
@@ -27,8 +27,8 @@ Interceptar todo el tráfico entre dos víctimas (o víctima ↔ gateway) median
 
 | Parámetro | Descripción | Ejemplo |
 |-----------|-------------|---------|
-| `-t1` | IP de la víctima 1 | `192.168.1.10` |
-| `-t2` | IP de la víctima 2 | `192.168.1.20` |
+| `-t1` | IP de la víctima 1 | `7.41.1.10` |
+| `-t2` | IP de la víctima 2 | `7.41.1.20` |
 | `-i` / `--iface` | Interfaz de red | `eth2` |
 
 ### Requisitos para Utilizar la Herramienta
@@ -46,7 +46,7 @@ sudo / root (obligatorio)
 # Condiciones de red
 - IP forwarding habilitado: echo 1 > /proc/sys/net/ipv4/ip_forward
 - Kali en el mismo segmento L2 que las víctimas
-- Interfaz eth2 configurada en el rango 192.168.1.0/24
+- Interfaz eth2 configurada en el rango 7.41.1.0/24
 ```
 
 ---
@@ -57,7 +57,7 @@ sudo / root (obligatorio)
 ┌─────────────────────────────────────────────────────────┐
 │  Topología: ARP MitM                                    │
 │                                                         │
-│  192.168.1.10        192.168.1.20        192.168.1.50   │
+│    7.41.1.10           7.41.1.20          7.41.1.50     │
 │  ┌──────────┐        ┌──────────┐        ┌──────────┐   │
 │  │Víctima 1 │        │Víctima 2 │        │   Kali   │   │
 │  │  eth1    │        │  eth1    │        │   eth2   │   │
@@ -99,16 +99,16 @@ sudo / root (obligatorio)
 
 ```bash
 # ── Kali — Interfaz de ataque ──
-ip addr add 192.168.1.50/24 dev eth2
+ip addr add 7.41.1.50/24 dev eth2
 ip link set eth2 up
 echo 1 > /proc/sys/net/ipv4/ip_forward   # OBLIGATORIO para reenvío de tráfico
 
 # ── PC-Víctima 1 ──
-ip addr add 192.168.1.10/24 dev eth1
+ip addr add 7.41.1.10/24 dev eth1
 ip link set eth1 up
 
 # ── PC-Víctima 2 ──
-ip addr add 192.168.1.20/24 dev eth1
+ip addr add 7.41.1.20/24 dev eth1
 ip link set eth1 up
 ```
 
@@ -121,8 +121,8 @@ El script `02_arp_mitm.py` implementa el ataque en dos fases continuas:
 **Fase 1 — Envenenamiento ARP (periódico, cada 1 segundo):**
 
 ```
-Kali → Víctima 1: "La IP de Víctima2 (192.168.1.20) tiene la MAC de Kali"
-Kali → Víctima 2: "La IP de Víctima1 (192.168.1.10) tiene la MAC de Kali"
+Kali → Víctima 1: "La IP de Víctima2 (7.41.1.20) tiene la MAC de Kali"
+Kali → Víctima 2: "La IP de Víctima1 (7.41.1.10) tiene la MAC de Kali"
 ```
 
 Ambas víctimas actualizan su caché ARP con la MAC de Kali. Todo su tráfico mutuo pasa ahora por Kali.
@@ -145,16 +145,16 @@ El script envía ARP Replies correctos con las MACs originales de cada host, res
 
 ```bash
 # Configurar interfaz y habilitar IP forwarding
-ip addr add 192.168.1.50/24 dev eth2
+ip addr add 7.41.1.50/24 dev eth2
 ip link set eth2 up
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # Ejecutar ataque MitM entre Víctima 1 y Víctima 2
-sudo python3 02_arp_mitm.py -t1 192.168.1.10 -t2 192.168.1.20 -i eth2
+sudo python3 02_arp_mitm.py -t1 7.41.1.10 -t2 192.168.1.20 -i eth2
 
 # En una segunda terminal — verificar que el ARP está envenenado
 arp -n
-# Resultado esperado: la MAC de 192.168.1.20 debe ser la MAC de Kali
+# Resultado esperado: la MAC de 7.41.1.20 debe ser la MAC de Kali
 ```
 
 ### Verificación del Ataque
@@ -163,10 +163,10 @@ arp -n
 # En cualquier víctima (durante el ataque)
 arp -n
 # Resultado esperado:
-# 192.168.1.20  ether  AA:BB:CC:DD:EE:FF  (← MAC de Kali)
+# 7.41.1.20  ether  AA:BB:CC:DD:EE:FF  (← MAC de Kali)
 
 # Ver tráfico interceptado en Kali
-tcpdump -i eth2 -n host 192.168.1.10
+tcpdump -i eth2 -n host 7.41.1.10
 # Resultado esperado: paquetes de y hacia Víctima 1 visibles en Kali
 ```
 
