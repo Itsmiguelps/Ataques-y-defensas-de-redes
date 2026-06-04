@@ -224,8 +224,7 @@ SW# show ip arp inspection statistics vlan 1
 
 ## 📹 Video de Demostración
 
-> **Archivo:** `video/demo_02_arp_mitm.mp4`  
-> **Duración máxima:** 5 minutos
+> **Archivo:** `video/02_arp_mitm`  
 
 El video debe incluir:
 - ✅ Topología visible con nombre y matrícula del estudiante
