@@ -348,16 +348,12 @@ Privilegios requeridos        →  root (sudo obligatorio en todos los scripts)
 ## 📁 Estructura de Cada Repositorio
 
 ```text
-Network-Security-Lab/
+Network-Attacks-and-Defenses/
 │
 ├── README.md
-├── LICENSE
-├── .gitignore
 │
 ├── docs/
-│   ├── Informe_Final.pdf
-│   ├── Presentacion.pptx
-│   └── Diagramas/
+│   └── Informe_Final.pdf
 │
 ├── scripts/
 │   ├── cdp_dos/
@@ -384,22 +380,6 @@ Network-Security-Lab/
 │       ├── stp_root_attack.py
 │       └── README.md
 │
-├── packet_tracer/
-│   ├── DHCP_Spoofing.pkt
-│   ├── DHCP_Starvation.pkt
-│   ├── ARP_Spoofing.pkt
-│   ├── MAC_Flooding.pkt
-│   └── STP_Root_Attack.pkt
-│
-├── captures/
-│   ├── arp_spoofing/
-│   │   ├── wireshark_1.png
-│   │   └── wireshark_2.png
-│   │
-│   ├── dhcp_spoofing/
-│   ├── dhcp_starvation/
-│   ├── mac_flooding/
-│   └── stp_root_attack/
 │
 └── videos/
     └── enlaces_youtube
