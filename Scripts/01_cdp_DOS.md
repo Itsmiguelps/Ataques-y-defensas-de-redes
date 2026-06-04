@@ -77,20 +77,20 @@ sudo / root (requerido para envío de paquetes raw)
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    PNetLab Topology                     │
+│                    PNetLab Topologia                     │
 │                                                         │
-│   ┌──────────┐  Trunk VLAN10,20   ┌──────────┐        │
-│   │   SW1    ├────────────────────┤   SW2    │        │
-│   │ (Core)   │ e0/0 ←──→ e1/0    │ (Client) │        │
-│   └──────────┘                    └────┬─────┘        │
-│                                        │ e1/1          │
-│                              Trunk VLAN10,20            │
-│                                        │               │
-│                              ┌─────────┴──────────┐   │
-│                              │   Kali (eth2)       │   │
-│                              │  192.168.1.50/24    │   │
-│                              │     [Atacante]      │   │
-│                              └────────────────────-┘   │
+│   ┌──────────┐  Trunk VLAN10,20   ┌──────────┐          │
+│   │   SW1    ├────────────────────┤   SW2    │          │
+│   │ (Core)   │ e0/0 ←──→ e1/0     │ (Client) │           │
+│   └──────────┘                    └────┬─────┘          │
+│                                        │ e1/1           │
+│                                        │                │
+│                                        │                │
+│                              ┌─────────┴──────────┐     │
+│                              │   Kali (eth2)       │    │
+│                              │  192.168.1.50/24    │    │
+│                              │     [Atacante]      │    │
+│                              └────────────────────-┘    │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -221,18 +221,6 @@ SW1(config-if)# no cdp enable
 
 ---
 
-## 📁 Estructura del Repositorio
-
-```
-01_cdp_dos/
-├── README.md               ← Este archivo
-├── 01_cdp_dos.py           ← Script de ataque (ya existente)
-├── capturas/               ← Screenshots del ataque y verificación
-│   ├── ataque_cdp_neighbors.png
-│   ├── cpu_alta.png
-│   └── contrammedida_verificacion.png
-└── video/                  ← Video demostrativo (máx. 5 min)
-    └── demo_cdp_dos.mp4
 ```
 
 ---
