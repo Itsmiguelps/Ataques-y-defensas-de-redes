@@ -20,7 +20,7 @@
 |-------|---------|
 | **Asignatura** | Seguridad en Redes |
 | **Entorno** | PNetLab + Kali Linux Docker + Cisco IOSvL2 |
-| **Script** | `06_stp_root_claim.py` |
+| **Script** | `stp_root_claim.py` |
 | **Protocolo atacado** | STP 802.1D / PVST+ (Cisco) |
 | **Herramienta** | Python 3 + Scapy |
 | **Impacto** | Control de topología L2 + DoS de 30–50 segundos |
