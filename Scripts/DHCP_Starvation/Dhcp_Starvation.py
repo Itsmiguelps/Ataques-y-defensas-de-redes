@@ -27,8 +27,8 @@ REQUISITOS:
     - Acceso al segmento de red capa 2
 
 USO:
-    sudo python3 04_dhcp_starvation.py -i eth2 -c 254
-    sudo python3 04_dhcp_starvation.py -i eth2 -c 500 --confirm --delay 0.1
+    sudo python3 dhcp_starvation.py -i eth2 -c 254
+    sudo python3 dhcp_starvation.py -i eth2 -c 500 --confirm --delay 0.1
 
 PARÁMETROS:
     -i / --interface   : Interfaz de red
