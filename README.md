@@ -367,7 +367,7 @@ Network-Attacks-and-Defenses/
 ```
 ---
  
-## 🎥 D Video
+## 🎥 Video
  
 📹 El proceso completo del laboratorio fue grabado y documentado:
  
