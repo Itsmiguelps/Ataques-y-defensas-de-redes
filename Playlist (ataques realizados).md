@@ -1,5 +1,3 @@
----
- 
 ## 🎥 Video
  
 📹 El proceso completo del laboratorio fue grabado y documentado:
