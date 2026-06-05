@@ -136,7 +136,7 @@ Cada ataque está organizado en su propio repositorio independiente, con documen
 Inunda la tabla de vecinos CDP de un switch Cisco con cientos de entradas falsas construidas con Scapy. Cada paquete lleva TLVs aleatorios (`DeviceID: ROUTER-XXXXXX`) y se envía a la dirección multicast CDP `01:00:0C:CC:CC:CC`, causando agotamiento de CPU y memoria.
 
 ```bash
-sudo python3 01_cdp_dos.py -i eth2 -c 1000 -d 0.001
+sudo python3 cdp_dos.py -i eth2 -c 1000 -d 0.001
 ```
 
 | Parámetro | Descripción | Default |
@@ -157,7 +157,7 @@ sudo python3 01_cdp_dos.py -i eth2 -c 1000 -d 0.001
 Envía ARP Replies no solicitados (Gratuitous ARP) a dos víctimas cada segundo: le dice a cada una que la IP de la otra tiene la MAC de Kali. Con IP forwarding activo, Kali reenvía el tráfico de forma transparente. Al detener el ataque (Ctrl+C), restaura las tablas ARP originales.
 
 ```bash
-sudo python3 02_arp_mitm.py -t1 7.41.1.10 -t2 7.41.1.20 -i eth2
+sudo python3 arp_mitm.py -t1 7.41.1.10 -t2 7.41.1.20 -i eth2
 ```
 
 | Parámetro | Descripción |
@@ -177,7 +177,7 @@ sudo python3 02_arp_mitm.py -t1 7.41.1.10 -t2 7.41.1.20 -i eth2
 Implementa un servidor DHCP fraudulento que responde al handshake DORA completo antes que el servidor legítimo. Asigna como gateway la IP de Kali y un DNS controlado por el atacante, logrando MitM automático sobre todos los clientes que renueven su IP.
 
 ```bash
-sudo python3 03_dhcp_spoofing.py -i eth2 \
+sudo python3 dhcp_spoofing.py -i eth2 \
   --pool 7.41.10.200-220 \
   --gateway 7.41.10.50 \
   --dns 8.8.8.8
@@ -201,7 +201,7 @@ sudo python3 03_dhcp_spoofing.py -i eth2 \
 Genera MACs aleatorias con OUIs de fabricantes reales (VMware, VirtualBox, QEMU) y envía DHCP Discovers masivos. En modo `--confirm`, completa el handshake DORA con cada MAC falsa, bloqueando definitivamente todas las IPs del pool hasta que expire el lease.
 
 ```bash
-sudo python3 04_dhcp_starvation.py -i eth2 -c 500 --confirm --delay 0.1
+sudo python3 dhcp_starvation.py -i eth2 -c 500 --confirm --delay 0.1
 ```
 
 | Parámetro | Descripción | Default |
@@ -222,8 +222,8 @@ sudo python3 04_dhcp_starvation.py -i eth2 -c 500 --confirm --delay 0.1
 Genera tramas Ethernet con MACs de origen y destino completamente aleatorias en lotes de 100, usando múltiples hilos paralelos. La tabla CAM del switch (~8192 entradas) se satura rápidamente: el switch no puede aprender MACs legítimas y pasa a hacer flooding unicast a todos los puertos.
 
 ```bash
-sudo python3 05_mac_flooding.py -i eth2 --continuous --threads 4
-sudo python3 05_mac_flooding.py -i eth2 -c 50000 --vlan 10
+sudo python3 mac_flooding.py -i eth2 --continuous --threads 4
+sudo python3 mac_flooding.py -i eth2 -c 50000 --vlan 10
 ```
 
 | Parámetro | Descripción | Default |
@@ -244,7 +244,7 @@ sudo python3 05_mac_flooding.py -i eth2 -c 50000 --vlan 10
 Envía BPDUs de configuración STP/PVST+ con `Bridge Priority = 0` y `Root Path Cost = 0` cada 2 segundos a la dirección multicast `01:80:C2:00:00:00`. Los switches, al recibir una prioridad menor a la propia (4096 > 0), inician la reelección del Root Bridge, reconvergiendo con Kali como nuevo Root y causando un DoS de 30–50 segundos.
 
 ```bash
-sudo python3 06_stp_root_claim.py -i eth2 --priority 0 --hello 1 --vlan 10
+sudo python3 stp_root_claim.py -i eth2 --priority 0 --hello 1 --vlan 10
 ```
 
 | Parámetro | Descripción | Default |
