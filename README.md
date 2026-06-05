@@ -404,4 +404,6 @@ Este material es de uso **exclusivamente académico**. No se autoriza su uso en 
 
 *PNetLab · Kali Linux Docker · Cisco IOSvL2 · Python 3 · Scapy*
 
+*Proyecto académico — ITLA 2025 | Seguridad Informática*
+
 </div>
