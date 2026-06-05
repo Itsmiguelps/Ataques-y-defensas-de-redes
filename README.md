@@ -61,11 +61,11 @@ Cada ataque está organizado en su propio repositorio independiente, con documen
 | # | Ataque | Protocolo | Capa | Impacto | Repositorio |
 |:-:|--------|:---------:|:----:|---------|:-----------:|
 | 01 | 🔴 **CDP DoS** | CDP | L2 Cisco | Alta CPU · tabla CDP agotada | [📁 Ver repo](https://github.com/Itsmiguelps/Ataques-y-defensas-de-redes/tree/main/Scripts/cdp_dos) |
-| 02 | 🟠 **ARP MitM** | ARP (RFC 826) | L2/L3 | Intercepción total del tráfico | [📁 Ver repo](#) |
-| 03 | 🟡 **DHCP Spoofing** | DHCP (RFC 2131) | L2/L3 | MitM automático + DNS malicioso | [📁 Ver repo](#) |
-| 04 | 🟠 **DHCP Starvation** | DHCP (RFC 2131) | L2/L3 | DoS: clientes sin dirección IP | [📁 Ver repo](#) |
-| 05 | 🔵 **MAC Flooding** | Ethernet 802.3 | L2 | Switch en modo hub · sniffing total | [📁 Ver repo](#) |
-| 06 | 🟣 **STP Root Claim** | STP 802.1D / PVST+ | L2 | Control de topología · DoS 30–50 s | [📁 Ver repo](#) |
+| 02 | 🟠 **ARP MitM** | ARP (RFC 826) | L2/L3 | Intercepción total del tráfico | [📁 Ver repo](https://github.com/Itsmiguelps/Ataques-y-defensas-de-redes/tree/main/Scripts/MITM_ARP) |
+| 03 | 🟡 **DHCP Spoofing** | DHCP (RFC 2131) | L2/L3 | MitM automático + DNS malicioso | [📁 Ver repo](https://github.com/Itsmiguelps/Ataques-y-defensas-de-redes/tree/main/Scripts/DHCP_Spoofing) |
+| 04 | 🟠 **DHCP Starvation** | DHCP (RFC 2131) | L2/L3 | DoS: clientes sin dirección IP | [📁 Ver repo](https://github.com/Itsmiguelps/Ataques-y-defensas-de-redes/tree/main/Scripts/DHCP_Starvation) |
+| 05 | 🔵 **MAC Flooding** | Ethernet 802.3 | L2 | Switch en modo hub · sniffing total | [📁 Ver repo](https://github.com/Itsmiguelps/Ataques-y-defensas-de-redes/tree/main/Scripts/%20MAC_Flooding) |
+| 06 | 🟣 **STP Root Claim** | STP 802.1D / PVST+ | L2 | Control de topología · DoS 30–50 s | [📁 Ver repo](https://github.com/Itsmiguelps/Ataques-y-defensas-de-redes/tree/main/Scripts/STP_Claim_Root_Attack) |
 
 ---
 
