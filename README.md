@@ -337,7 +337,7 @@ Network-Attacks-and-Defenses/
 ├── README.md
 │
 ├── docs/
-│   └── Informe_Final.pdf
+│   └── Documentacion tecnica.pdf
 │
 ├── scripts/
 │   ├── cdp_dos/
@@ -363,12 +363,17 @@ Network-Attacks-and-Defenses/
 │   └── stp_root_attack/
 │       ├── stp_root_attack.py
 │       └── README.md
-│
-│
-└── videos/
-    └── enlaces_youtube
+└── 
 ```
-
+---
+ 
+## 🎥 D Video
+ 
+📹 El proceso completo del laboratorio fue grabado y documentado:
+ 
+> **[Ver Videos →](https://www.youtube.com/playlist?list=PL7fyKcoaUM3-yGXB4a5rSAdiru8yLqHr9)**
+ 
+---
 ---
  
 ## 🛠️ Stack Tecnológico
