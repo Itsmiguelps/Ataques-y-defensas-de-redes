@@ -60,7 +60,7 @@ Cada ataque está organizado en su propio repositorio independiente, con documen
 
 | # | Ataque | Protocolo | Capa | Impacto | Repositorio |
 |:-:|--------|:---------:|:----:|---------|:-----------:|
-| 01 | 🔴 **CDP DoS** | CDP | L2 Cisco | Alta CPU · tabla CDP agotada | [📁 Ver repo](#) |
+| 01 | 🔴 **CDP DoS** | CDP | L2 Cisco | Alta CPU · tabla CDP agotada | [📁 Ver repo](https://github.com/Itsmiguelps/Ataques-y-defensas-de-redes/tree/main/Scripts/cdp_dos) |
 | 02 | 🟠 **ARP MitM** | ARP (RFC 826) | L2/L3 | Intercepción total del tráfico | [📁 Ver repo](#) |
 | 03 | 🟡 **DHCP Spoofing** | DHCP (RFC 2131) | L2/L3 | MitM automático + DNS malicioso | [📁 Ver repo](#) |
 | 04 | 🟠 **DHCP Starvation** | DHCP (RFC 2131) | L2/L3 | DoS: clientes sin dirección IP | [📁 Ver repo](#) |
